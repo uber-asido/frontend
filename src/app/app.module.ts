@@ -6,6 +6,8 @@ import { MatButtonModule, MatIconModule } from "@angular/material";
 import { AppComponent } from './app.component';
 import { routes } from "./app.routes";
 
+import { BrowserGlobalsModule } from "./modules/shared/browser-globals";
+
 @NgModule({
     declarations: [
         AppComponent
@@ -13,6 +15,8 @@ import { routes } from "./app.routes";
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+
+        BrowserGlobalsModule,
 
         routes
     ],

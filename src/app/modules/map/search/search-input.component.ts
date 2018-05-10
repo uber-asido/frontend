@@ -1,22 +1,10 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
-export enum SearchItemType {
-    freeText = 1,
-    movie,
-    person,
-    organization,
-}
-
-export class SearchItem {
-    constructor(
-        public readonly text: string,
-        public readonly type: SearchItemType
-    ) { }
-}
+import { SearchItem, SearchItemType } from "../map.service";
 
 @Component({
     selector: 'ub-search-input',
@@ -24,6 +12,8 @@ export class SearchItem {
     styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent {
+    @Input() autocompletion: SearchItem[];
+
     @ViewChild("searchInput") searchInputRef: ElementRef;
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
@@ -31,7 +21,7 @@ export class SearchInputComponent {
     public readonly autocompleteOptions: Observable<SearchItem[]> = this.searchControl.valueChanges.pipe(
         startWith<string | SearchItem>(""), // start with an empty string to make sure completion is shown on first focus.
         map(value => typeof value === "string"? value : value.text),
-        map(value => this.hardcodedAutocomplete.filter(e => e.text.toLowerCase().includes(value.toLowerCase())))
+        map(value => this.autocompletion.filter(e => e.text.toLowerCase().includes(value.toLowerCase())))
     );
 
     public displayFunction(item?: SearchItem): string {
@@ -45,17 +35,4 @@ export class SearchInputComponent {
     public onOptionSelected(event: MatAutocompleteSelectedEvent): void {
         console.log(event.option.value);
     }
-
-    private hardcodedAutocomplete: SearchItem[] = [
-        new SearchItem("300", SearchItemType.movie),
-        new SearchItem("Brad Pitt", SearchItemType.person),
-        new SearchItem("Garry Oldman", SearchItemType.person),
-        new SearchItem("Lady Bird", SearchItemType.movie),
-        new SearchItem("Nicolas Cage", SearchItemType.person),
-        new SearchItem("Martin Sheen", SearchItemType.person),
-        new SearchItem("Truth or Dare", SearchItemType.movie),
-        new SearchItem("Columbia Pictures", SearchItemType.organization),
-        new SearchItem("Warner Bros", SearchItemType.organization),
-        new SearchItem("Paramount Pictures", SearchItemType.organization)
-    ];
 }

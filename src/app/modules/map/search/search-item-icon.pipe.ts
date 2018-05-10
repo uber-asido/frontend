@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { SearchItemType } from "./search-input.component";
+import { SearchItemType } from "../map.service";
 
 @Pipe({name: "searchItemIcon"})
 export class SearchItemIconPipe implements PipeTransform{

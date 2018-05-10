@@ -1,14 +1,15 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { AutocompleteItemType } from "./search-input.component";
+import { SearchItemType } from "./search-input.component";
 
-@Pipe({name: "searchAutocompleteIcon"})
-export class SearchAutocompleteIconPipe implements PipeTransform{
-    transform(type: AutocompleteItemType): string {
+@Pipe({name: "searchItemIcon"})
+export class SearchItemIconPipe implements PipeTransform{
+    transform(type: SearchItemType): string {
         switch (type) {
-            case AutocompleteItemType.Movie: return "local_movies";
-            case AutocompleteItemType.Organization: return "business";
-            case AutocompleteItemType.Person: return "person";
+            case SearchItemType.freeText: return "title";
+            case SearchItemType.movie: return "local_movies";
+            case SearchItemType.organization: return "business";
+            case SearchItemType.person: return "person";
             default: throw Error(`Unknown type: ${type}`);
         }
     }

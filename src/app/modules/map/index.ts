@@ -9,7 +9,7 @@ import { MapService } from "./map.service";
 import { MapComponent } from "./map.component";
 import { GoogleMapComponent } from "./google-map.component";
 import { SearchInputComponent } from "./search-input.component";
-import { SearchAutocompleteIconPipe } from "./search-autocomplete-icon.pipe";
+import { SearchItemIconPipe } from "./search-autocomplete-icon.pipe";
 import { routes } from "./map.routes";
 
 @NgModule({
@@ -17,7 +17,7 @@ import { routes } from "./map.routes";
         GoogleMapComponent,
         MapComponent,
         SearchInputComponent,
-        SearchAutocompleteIconPipe
+        SearchItemIconPipe
     ],
     imports: [
         CommonModule,

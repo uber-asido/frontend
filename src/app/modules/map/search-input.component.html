@@ -1,11 +1,13 @@
 <input #searchInput placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="searchControl" />
-<button mat-icon-button (click)="onSearchClick()">
-    <mat-icon>search</mat-icon>
-</button>
+<div class="action-container">
+    <button mat-icon-button (click)="onSearchClick()">
+        <mat-icon>search</mat-icon>
+    </button>
+</div>
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="onOptionSelected($event)">
     <ng-container *ngFor="let option of autocompleteOptions | async">
         <mat-option [value]="option">
-            <mat-icon>{{ option.type | searchAutocompleteIcon }}</mat-icon>
+            <mat-icon>{{ option.type | searchItemIcon }}</mat-icon>
             <span>{{ option.text }}</span>
         </mat-option>
     </ng-container>

@@ -4,17 +4,17 @@ import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
-export enum AutocompleteItemType {
-    FreeText = 1,
-    Movie,
-    Person,
-    Organization,
+export enum SearchItemType {
+    freeText = 1,
+    movie,
+    person,
+    organization,
 }
 
-export class AutocompleteItem {
+export class SearchItem {
     constructor(
         public readonly text: string,
-        public readonly type: AutocompleteItemType
+        public readonly type: SearchItemType
     ) { }
 }
 
@@ -28,13 +28,13 @@ export class SearchInputComponent {
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
     public readonly searchControl = new FormControl();
-    public readonly autocompleteOptions: Observable<AutocompleteItem[]> = this.searchControl.valueChanges.pipe(
-        startWith<string | AutocompleteItem>(""), // start with an empty string to make sure completion is shown on first focus.
+    public readonly autocompleteOptions: Observable<SearchItem[]> = this.searchControl.valueChanges.pipe(
+        startWith<string | SearchItem>(""), // start with an empty string to make sure completion is shown on first focus.
         map(value => typeof value === "string"? value : value.text),
         map(value => this.hardcodedAutocomplete.filter(e => e.text.toLowerCase().includes(value.toLowerCase())))
     );
 
-    public displayFunction(item?: AutocompleteItem): string {
+    public displayFunction(item?: SearchItem): string {
         return item ? item.text : undefined;
     }
 
@@ -46,16 +46,16 @@ export class SearchInputComponent {
         console.log(event.option.value);
     }
 
-    private hardcodedAutocomplete: AutocompleteItem[] = [
-        new AutocompleteItem("300", AutocompleteItemType.Movie),
-        new AutocompleteItem("Brad Pitt", AutocompleteItemType.Person),
-        new AutocompleteItem("Garry Oldman", AutocompleteItemType.Person),
-        new AutocompleteItem("Lady Bird", AutocompleteItemType.Movie),
-        new AutocompleteItem("Nicolas Cage", AutocompleteItemType.Person),
-        new AutocompleteItem("Martin Sheen", AutocompleteItemType.Person),
-        new AutocompleteItem("Truth or Dare", AutocompleteItemType.Movie),
-        new AutocompleteItem("Columbia Pictures", AutocompleteItemType.Organization),
-        new AutocompleteItem("Warner Bros", AutocompleteItemType.Organization),
-        new AutocompleteItem("Paramount Pictures", AutocompleteItemType.Organization)
+    private hardcodedAutocomplete: SearchItem[] = [
+        new SearchItem("300", SearchItemType.movie),
+        new SearchItem("Brad Pitt", SearchItemType.person),
+        new SearchItem("Garry Oldman", SearchItemType.person),
+        new SearchItem("Lady Bird", SearchItemType.movie),
+        new SearchItem("Nicolas Cage", SearchItemType.person),
+        new SearchItem("Martin Sheen", SearchItemType.person),
+        new SearchItem("Truth or Dare", SearchItemType.movie),
+        new SearchItem("Columbia Pictures", SearchItemType.organization),
+        new SearchItem("Warner Bros", SearchItemType.organization),
+        new SearchItem("Paramount Pictures", SearchItemType.organization)
     ];
 }

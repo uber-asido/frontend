@@ -3,11 +3,10 @@
     <mat-icon>search</mat-icon>
 </button>
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="onOptionSelected($event)">
-    <ng-container *ngFor="let option of autocompleteOptions | async; let last=last">
+    <ng-container *ngFor="let option of autocompleteOptions | async">
         <mat-option [value]="option">
             <mat-icon>{{ option.type | searchAutocompleteIcon }}</mat-icon>
             <span>{{ option.text }}</span>
         </mat-option>
-        <mat-divider *ngIf="!last"></mat-divider>
     </ng-container>
 </mat-autocomplete>

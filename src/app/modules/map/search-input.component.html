@@ -3,9 +3,11 @@
     <mat-icon>search</mat-icon>
 </button>
 <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let state of autocompleteOptions | async" [value]="state.name">
-        <img style="vertical-align:middle;" src="{{state.flag}}" height="25" />
-        <span>{{ state.name }}</span> |
-        <small>Population: {{state.population}}</small>
-    </mat-option>
+    <ng-container *ngFor="let option of autocompleteOptions | async; let last=last">
+        <mat-option [value]="option.text">
+            <mat-icon>{{ option.type | searchAutocompleteIcon }}</mat-icon>
+            <span>{{ option.text }}</span>
+        </mat-option>
+        <mat-divider *ngIf="!last"></mat-divider>
+    </ng-container>
 </mat-autocomplete>

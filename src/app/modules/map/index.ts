@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule, MatButtonModule, MatIconModule, MatInputModule, MatOptionModule, MatSnackBarModule } from "@angular/material";
+import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatSnackBarModule } from "@angular/material";
 
 import { ScriptLoaderModule } from "../shared/script-loader";
 import { GoogleMapLoader } from "./google-map.loader";
@@ -9,13 +9,15 @@ import { MapService } from "./map.service";
 import { MapComponent } from "./map.component";
 import { GoogleMapComponent } from "./google-map.component";
 import { SearchInputComponent } from "./search-input.component";
+import { SearchAutocompleteIconPipe } from "./search-autocomplete-icon.pipe";
 import { routes } from "./map.routes";
 
 @NgModule({
     declarations: [
         GoogleMapComponent,
         MapComponent,
-        SearchInputComponent
+        SearchInputComponent,
+        SearchAutocompleteIconPipe
     ],
     imports: [
         CommonModule,
@@ -24,6 +26,7 @@ import { routes } from "./map.routes";
 
         MatAutocompleteModule,
         MatButtonModule,
+        MatDividerModule,
         MatIconModule,
         MatInputModule,
         MatOptionModule,

@@ -1,11 +1,19 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
+export enum AutocompleteItemType {
+    Movie = 1,
+    Person,
+    Organization
+}
 
-export class State {
-    constructor(public name: string, public population: string, public flag: string) { }
+export class AutocompleteItem {
+    constructor(
+        public readonly text: string,
+        public readonly type: AutocompleteItemType
+    ) { }
 }
 
 @Component({
@@ -13,47 +21,33 @@ export class State {
     templateUrl: './search-input.component.html',
     styleUrls: ['./search-input.component.scss']
 })
-export class SearchInputComponent implements OnInit {
+export class SearchInputComponent {
     @ViewChild("searchInput") searchInputRef: ElementRef;
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
     public readonly searchControl = new FormControl();
-
-    public states: State[] = [
-        {
-          name: 'Arkansas',
-          population: '2.978M',
-          flag: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg'
-        },
-        {
-          name: 'California',
-          population: '39.14M',
-          flag: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg'
-        },
-        {
-          name: 'Florida',
-          population: '20.27M',
-          flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg'
-        },
-        {
-          name: 'Texas',
-          population: '27.47M',
-          flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
-        }
-    ];
-    public autocompleteOptions: Observable<State[]>;
-
-    ngOnInit() {
-        this.autocompleteOptions = this.searchControl.valueChanges.pipe(
-            startWith(""), // start with empty string to make sure completion is shown on first focus.
-            map(val => {
-                val = val.toLowerCase();
-                return this.states.filter(e => e.name.toLowerCase().includes(val));
-            })
-        );
-    }
+    public readonly autocompleteOptions: Observable<AutocompleteItem[]> = this.searchControl.valueChanges.pipe(
+        startWith(""), // start with an empty string to make sure completion is shown on first focus.
+        map(val => {
+            val = val.toLowerCase();
+            return this.hardcodedAutocomplete.filter(e => e.text.toLowerCase().includes(val));
+        })
+    );
 
     public onSearchClick(): void {
         this.searchInput.focus();
     }
+
+    private hardcodedAutocomplete: AutocompleteItem[] = [
+        new AutocompleteItem("300", AutocompleteItemType.Movie),
+        new AutocompleteItem("Brad Pitt", AutocompleteItemType.Person),
+        new AutocompleteItem("Garry Oldman", AutocompleteItemType.Person),
+        new AutocompleteItem("Lady Bird", AutocompleteItemType.Movie),
+        new AutocompleteItem("Nicolas Cage", AutocompleteItemType.Person),
+        new AutocompleteItem("Martin Sheen", AutocompleteItemType.Person),
+        new AutocompleteItem("Truth or Dare", AutocompleteItemType.Movie),
+        new AutocompleteItem("Columbia Pictures", AutocompleteItemType.Organization),
+        new AutocompleteItem("Warner Bros", AutocompleteItemType.Organization),
+        new AutocompleteItem("Paramount Pictures", AutocompleteItemType.Organization)
+    ];
 }

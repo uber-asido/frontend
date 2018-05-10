@@ -1,9 +1,9 @@
-<input placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="stateCtrl" />
-<button mat-icon-button>
+<input #searchInput placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="searchControl" />
+<button mat-icon-button (click)="onSearchClick()">
     <mat-icon>search</mat-icon>
 </button>
 <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let state of states" [value]="state.name">
+    <mat-option *ngFor="let state of autocompleteOptions | async" [value]="state.name">
         <img style="vertical-align:middle;" src="{{state.flag}}" height="25" />
         <span>{{ state.name }}</span> |
         <small>Population: {{state.population}}</small>

@@ -1,5 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 
 export class State {
@@ -11,9 +13,11 @@ export class State {
     templateUrl: './search-input.component.html',
     styleUrls: ['./search-input.component.scss']
 })
-export class SearchInputComponent {
-    public readonly stateCtrl = new FormControl();
+export class SearchInputComponent implements OnInit {
+    @ViewChild("searchInput") searchInputRef: ElementRef;
+    private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
+    public readonly searchControl = new FormControl();
 
     public states: State[] = [
         {
@@ -37,4 +41,16 @@ export class SearchInputComponent {
           flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
         }
     ];
+    public autocompleteOptions: Observable<State[]>;
+
+    ngOnInit() {
+        this.autocompleteOptions = this.searchControl.valueChanges.pipe(map(val => {
+            val = val.toLowerCase();
+            return this.states.filter(e => e.name.toLowerCase().includes(val));
+        }));
+    }
+
+    public onSearchClick(): void {
+        this.searchInput.focus();
+    }
 }

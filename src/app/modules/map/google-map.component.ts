@@ -14,6 +14,11 @@ export class FilmLocation {
     ) { }
 }
 
+export class MarkerIcon {
+    public static readonly deselected = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+    public static readonly selected = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+}
+
 @Component({
     selector: 'ub-google-map',
     templateUrl: './google-map.component.html',
@@ -31,6 +36,7 @@ export class GoogleMapComponent implements AfterViewInit {
 
     private map: any;
     private markers: any[] = [];
+    private selectedMarker: any;
     private clusterer: any;
 
     constructor(
@@ -48,12 +54,23 @@ export class GoogleMapComponent implements AfterViewInit {
 
         this.map = new google.maps.Map(this.mapRef.nativeElement, this.config);
 
+        google.maps.event.addListener(this.map, "click", () => {
+            this.deselectMarker();
+        });
+
         for (let i = 0; i < 1000; ++i) {
             this.filmLocations.push(new FilmLocation(37.0 + Math.random(), -123.0 + Math.random(), ""));
         }
         
         this.addMarkers(this.filmLocations);
     }
+
+    public deselectMarker(): void {
+        if (this.selectedMarker) {
+            this.selectedMarker.setIcon(MarkerIcon.deselected);
+            this.selectedMarker = null;
+        }
+    }    
 
     private addMarkers(filmLocations: FilmLocation[]): void {
         if (!this.map) {
@@ -65,10 +82,15 @@ export class GoogleMapComponent implements AfterViewInit {
                 map: this.map,
                 title: location.title,
                 position: new google.maps.LatLng(location.latitude, location.longitude),
-                icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                icon: MarkerIcon.deselected
             });
 
             marker.addListener("click", () => {
+                if (this.selectedMarker) {
+                    this.selectedMarker.setIcon(MarkerIcon.deselected);
+                }
+                this.selectedMarker = marker;
+                marker.setIcon(MarkerIcon.selected);
                 this.locationSelected.emit(location);
             });
 

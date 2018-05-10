@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, startWith } from "rxjs/operators";
 
 
 export class State {
@@ -44,10 +44,13 @@ export class SearchInputComponent implements OnInit {
     public autocompleteOptions: Observable<State[]>;
 
     ngOnInit() {
-        this.autocompleteOptions = this.searchControl.valueChanges.pipe(map(val => {
-            val = val.toLowerCase();
-            return this.states.filter(e => e.name.toLowerCase().includes(val));
-        }));
+        this.autocompleteOptions = this.searchControl.valueChanges.pipe(
+            startWith(""), // start with empty string to make sure completion is shown on first focus.
+            map(val => {
+                val = val.toLowerCase();
+                return this.states.filter(e => e.name.toLowerCase().includes(val));
+            })
+        );
     }
 
     public onSearchClick(): void {

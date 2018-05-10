@@ -5,9 +5,10 @@ import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
 export enum AutocompleteItemType {
-    Movie = 1,
+    FreeText = 1,
+    Movie,
     Person,
-    Organization
+    Organization,
 }
 
 export class AutocompleteItem {

@@ -5,6 +5,7 @@ import { MatAutocompleteModule, MatButtonModule, MatIconModule, MatInputModule, 
 
 import { ScriptLoaderModule } from "../shared/script-loader";
 import { GoogleMapLoader } from "./google-map.loader";
+import { MapService } from "./map.service";
 import { MapComponent } from "./map.component";
 import { GoogleMapComponent } from "./google-map.component";
 import { SearchInputComponent } from "./search-input.component";
@@ -32,7 +33,8 @@ import { routes } from "./map.routes";
         routes
     ],
     providers: [
-        GoogleMapLoader
+        GoogleMapLoader,
+        MapService
     ]
 })
 export class MapModule { }

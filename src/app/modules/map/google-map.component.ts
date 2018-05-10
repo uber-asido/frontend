@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSnackBar } from "@angular/material";
 
 import { GoogleMapLoader } from "./google-map.loader";
@@ -6,15 +6,12 @@ import { GoogleMapLoader } from "./google-map.loader";
 declare var google: any;
 declare var MarkerClusterer: any;
 
-export class FilmLocation {
-    constructor(
-        public readonly latitude: number,
-        public readonly longitude: number,
-        public readonly title: string
-    ) { }
+export interface Location {
+    latitude: number;
+    longitude: number;
 }
 
-export class MarkerIcon {
+class MarkerIcon {
     public static readonly deselected = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
     public static readonly selected = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
 }
@@ -24,15 +21,11 @@ export class MarkerIcon {
     templateUrl: './google-map.component.html',
     styleUrls: ['./google-map.component.scss']
 })
-export class GoogleMapComponent implements AfterViewInit {
-    @Output() readonly locationSelected = new EventEmitter<FilmLocation>();
+export class GoogleMapComponent implements AfterViewInit, OnChanges {
+    @Input() locations: Location[];
+    @Output() readonly locationSelected = new EventEmitter<Location>();
 
     @ViewChild("map") mapRef: ElementRef;
-
-    private readonly filmLocations: FilmLocation[] = [
-        new FilmLocation(37.779872, -122.439197, "Test location"),
-        new FilmLocation(37.779072, -122.436337, "Another location")
-    ];
 
     private map: any;
     private markers: any[] = [];
@@ -58,11 +51,14 @@ export class GoogleMapComponent implements AfterViewInit {
             this.deselectMarker();
         });
 
-        for (let i = 0; i < 1000; ++i) {
-            this.filmLocations.push(new FilmLocation(37.0 + Math.random(), -123.0 + Math.random(), ""));
+        this.resetMarkers();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        const locations = changes["locations"];
+        if (locations) {
+            this.resetMarkers();
         }
-        
-        this.addMarkers(this.filmLocations);
     }
 
     public deselectMarker(): void {
@@ -70,17 +66,25 @@ export class GoogleMapComponent implements AfterViewInit {
             this.selectedMarker.setIcon(MarkerIcon.deselected);
             this.selectedMarker = null;
         }
-    }    
+    }
 
-    private addMarkers(filmLocations: FilmLocation[]): void {
+    private resetMarkers(): void {
         if (!this.map) {
-            throw Error("!map");
+            return;
         }
 
-        filmLocations.forEach(location => {
+        this.deselectMarker();
+
+        if (this.clusterer) {
+            this.clusterer.setMap(null);
+        }
+
+        this.markers.forEach(e => e.setMap(null));
+        this.markers = [];
+
+        this.locations.forEach(location => {
             const marker = new google.maps.Marker({
                 map: this.map,
-                title: location.title,
                 position: new google.maps.LatLng(location.latitude, location.longitude),
                 icon: MarkerIcon.deselected
             });
@@ -96,10 +100,7 @@ export class GoogleMapComponent implements AfterViewInit {
 
             this.markers.push(marker);
         });
-
-        if (this.clusterer) {
-            this.clusterer.setMap(null);
-        }
+        
         this.clusterer = new MarkerClusterer(this.map, this.markers);
     }
 

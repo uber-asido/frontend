@@ -24,6 +24,7 @@ export class FilmLocation {
 
 export class MapState {
     public locations: FilmLocation[] = [];
+    public loadingLocations = false;
     public currentSearch: SearchItem = null;
     public autocompletion: SearchItem[] = [
         new SearchItem("300", SearchItemType.movie),

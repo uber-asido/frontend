@@ -1,8 +1,14 @@
 <input #searchInput placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="searchControl" />
 <div class="action-container">
-    <button mat-icon-button (click)="onSearchClick()">
-        <mat-icon>search</mat-icon>
-    </button>
+    <ng-container [ngSwitch]="visibleAction">
+        <button *ngSwitchCase="Action.search" mat-icon-button (click)="onActionSearch()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <button *ngSwitchCase="Action.clear" mat-icon-button (click)="onActionClear()">
+            <mat-icon>clear</mat-icon>
+        </button>
+        <mat-spinner *ngSwitchCase="Action.loading" diameter="26"></mat-spinner>
+    </ng-container>
 </div>
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="onOptionSelected($event)">
     <ng-container *ngFor="let option of autocompleteOptions | async">

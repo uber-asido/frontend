@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatSnackBarModule } from "@angular/material";
+import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressSpinnerModule, MatSnackBarModule } from "@angular/material";
 
 import { ScriptLoaderModule } from "../shared/script-loader";
 import { MapService } from "./map.service";
@@ -28,6 +28,7 @@ import { routes } from "./map.routes";
         MatIconModule,
         MatInputModule,
         MatOptionModule,
+        MatProgressSpinnerModule,
         MatSnackBarModule,
 
         ScriptLoaderModule,

@@ -4,12 +4,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatSnackBarModule } from "@angular/material";
 
 import { ScriptLoaderModule } from "../shared/script-loader";
-import { GoogleMapLoader } from "./google-map.loader";
 import { MapService } from "./map.service";
 import { MapComponent } from "./map.component";
-import { GoogleMapComponent } from "./google-map.component";
-import { SearchInputComponent } from "./search-input.component";
-import { SearchItemIconPipe } from "./search-autocomplete-icon.pipe";
+import { GoogleMapComponent, GoogleMapLoader } from "./google-map";
+import { SearchInputComponent, SearchItemIconPipe } from "./search";
 import { routes } from "./map.routes";
 
 @NgModule({

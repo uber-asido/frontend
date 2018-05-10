@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FilmLocation, MapService } from "./map.service";
-import { Location } from "./google-map.component";
+import { Location } from "./google-map";
 
 @Component({
     selector: 'ub-map',

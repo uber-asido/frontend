@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 
 import { environment } from "environments/environment";
-import { WindowRef } from "../shared/browser-globals";
-import { ScriptLoader } from "../shared/script-loader";
+import { WindowRef } from "../../shared/browser-globals";
+import { ScriptLoader } from "../../shared/script-loader";
 
 @Injectable()
 export class GoogleMapLoader {

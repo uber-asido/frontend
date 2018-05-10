@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 
@@ -27,15 +28,21 @@ export class SearchInputComponent {
 
     public readonly searchControl = new FormControl();
     public readonly autocompleteOptions: Observable<AutocompleteItem[]> = this.searchControl.valueChanges.pipe(
-        startWith(""), // start with an empty string to make sure completion is shown on first focus.
-        map(val => {
-            val = val.toLowerCase();
-            return this.hardcodedAutocomplete.filter(e => e.text.toLowerCase().includes(val));
-        })
+        startWith<string | AutocompleteItem>(""), // start with an empty string to make sure completion is shown on first focus.
+        map(value => typeof value === "string"? value : value.text),
+        map(value => this.hardcodedAutocomplete.filter(e => e.text.toLowerCase().includes(value.toLowerCase())))
     );
+
+    public displayFunction(item?: AutocompleteItem): string {
+        return item ? item.text : undefined;
+    }
 
     public onSearchClick(): void {
         this.searchInput.focus();
+    }
+
+    public onOptionSelected(event: MatAutocompleteSelectedEvent): void {
+        console.log(event.option.value);
     }
 
     private hardcodedAutocomplete: AutocompleteItem[] = [

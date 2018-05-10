@@ -2,9 +2,9 @@
 <button mat-icon-button (click)="onSearchClick()">
     <mat-icon>search</mat-icon>
 </button>
-<mat-autocomplete #auto="matAutocomplete">
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="onOptionSelected($event)">
     <ng-container *ngFor="let option of autocompleteOptions | async; let last=last">
-        <mat-option [value]="option.text">
+        <mat-option [value]="option">
             <mat-icon>{{ option.type | searchAutocompleteIcon }}</mat-icon>
             <span>{{ option.text }}</span>
         </mat-option>

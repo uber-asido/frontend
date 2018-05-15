@@ -1,4 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { MatSort, MatTableDataSource, PageEvent } from "@angular/material";
 
 import { FileApi } from "../shared/api-file";
 
@@ -7,11 +8,4 @@ import { FileApi } from "../shared/api-file";
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements AfterViewInit {
-    constructor(private readonly fileApi: FileApi) { }
-
-    async ngAfterViewInit() {
-        const history = await this.fileApi.getUploadHistory();
-        console.log(history);
-    }
-}
+export class AdminComponent { }

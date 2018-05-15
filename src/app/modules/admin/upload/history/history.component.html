@@ -1,0 +1,21 @@
+<mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="filename">
+        <mat-header-cell *matHeaderCellDef>Filename</mat-header-cell>
+        <mat-cell *matCellDef="let history">{{history.filename}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef>Uploaded</mat-header-cell>
+        <mat-cell *matCellDef="let history">{{history.timestampFromNow}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let history">{{history.status}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSize]="pageSize" [length]="tableSize" (page)="onPage($event)"></mat-paginator>
+
+<ub-loading *ngIf="loading"></ub-loading>

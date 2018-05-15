@@ -1,0 +1,4 @@
+<div class="loading" [class.no-background]="noBackground">
+    <mat-progress-bar *ngIf="hasProgress" mode="determinate" [value]="progress"></mat-progress-bar>
+    <mat-spinner *ngIf="!hasProgress"></mat-spinner>
+</div>

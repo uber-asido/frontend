@@ -164,6 +164,15 @@ export class QueryBuilder<T> {
     return odataSettings;
   }
 
+    public toQueryString(): string {
+        const query = this.toQuery();
+        const qs = Object.keys(query)
+            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
+            .join("&")
+            .replace(/%20/g, "+");
+        return qs;
+    }
+
   private propertiesToStrings<TValue>(...params:((type: T) => TValue)[]): string[]{
     let temp:string[] =[];
 

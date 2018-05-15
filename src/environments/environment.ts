@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    apiUrl: "http://localhost:50518/odata",
     mapApiKey: "AIzaSyBa8GWt6bsqItvQGTAFBLlY5WkX6Zwp73I"
 };
 

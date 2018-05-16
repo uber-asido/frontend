@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MatPaginatorModule, MatSnackBarModule, MatTableModule } from "@angular/material";
+import { MatButtonModule, MatIconModule, MatPaginatorModule, MatSnackBarModule, MatTableModule, MatToolbarModule } from "@angular/material";
 
 import { ApiFileModule } from "../shared/api-file";
 import { LoadingModule } from "../shared/loading";
@@ -14,9 +14,12 @@ import { routes } from "./admin.routes";
     imports: [
         CommonModule,
 
+        MatButtonModule,
+        MatIconModule,
         MatPaginatorModule,
         MatSnackBarModule,
         MatTableModule,
+        MatToolbarModule,
 
         ApiFileModule,
         LoadingModule,

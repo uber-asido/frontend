@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressSpinnerModule, MatSnackBarModule } from "@angular/material";
 
+import { ApiSearchModule } from "../shared/api-search";
 import { ScriptLoaderModule } from "../shared/script-loader";
 import { MapService } from "./map.service";
 import { MapComponent } from "./map.component";
@@ -31,7 +32,9 @@ import { routes } from "./map.routes";
         MatProgressSpinnerModule,
         MatSnackBarModule,
 
+        ApiSearchModule,
         ScriptLoaderModule,
+
         routes
     ],
     providers: [

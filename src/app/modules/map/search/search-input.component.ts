@@ -1,8 +1,8 @@
-import { Component, ElementRef, Input, ViewChild } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Observable } from "rxjs";
-import { map, startWith, tap } from "rxjs/operators";
+import { flatMap, map, startWith, tap } from "rxjs/operators";
 
 import { MapService, SearchItem, SearchItemType } from "../map.service";
 
@@ -18,8 +18,6 @@ enum Action {
     styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent {
-    @Input() autocompletion: SearchItem[];
-
     @ViewChild("searchInput") searchInputRef: ElementRef;
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
@@ -29,7 +27,7 @@ export class SearchInputComponent {
         map(value => typeof value === "string"? value : value.text),
         map(value => value.trim().toLowerCase()),
         tap(value => { if (!value) this.clearCurrentSearch(); }),
-        map(value => this.autocompletion.filter(e => e.text.toLowerCase().includes(value)))
+        flatMap(value => this.mapService.autocompleteSearch(value))
     );
 
     public get Action() { return Action; }

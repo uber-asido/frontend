@@ -10,7 +10,6 @@ import { Location } from "./google-map";
 })
 export class MapComponent {
     public get locations() { return this.mapService.state.locations; }
-    public get autocompletion() { return this.mapService.state.autocompletion; }
 
     constructor(private readonly mapService: MapService) { }
 

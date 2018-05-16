@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { MatButtonModule, MatIconModule, MatPaginatorModule, MatSnackBarModule, MatTableModule, MatToolbarModule } from "@angular/material";
+import { MatButtonModule, MatIconModule, MatPaginatorModule, MatProgressSpinnerModule, MatSnackBarModule, MatTableModule, MatToolbarModule, MatTooltipModule } from "@angular/material";
 import { NgUploaderModule } from "ngx-uploader";
 
 import { ApiFileModule } from "../../shared/api-file";
@@ -8,7 +8,7 @@ import { CardModule } from "../../shared/card";
 import { LoadingModule } from "../../shared/loading";
 import { SectionContentModule } from "../../shared/section-content";
 
-import { FileComponent } from "./file";
+import { FileComponent, StatusComponent } from "./file";
 import { HistoryComponent } from "./history";
 import { UploadComponent } from "./upload.component";
 import { UploadService } from "./upload.service";
@@ -22,9 +22,11 @@ import { routes } from "./upload.routes";
         MatButtonModule,
         MatIconModule,
         MatPaginatorModule,
+        MatProgressSpinnerModule,
         MatSnackBarModule,
         MatTableModule,
         MatToolbarModule,
+        MatTooltipModule,
 
         NgUploaderModule,
 
@@ -38,6 +40,7 @@ import { routes } from "./upload.routes";
     declarations: [
         FileComponent,
         HistoryComponent,
+        StatusComponent,
         UploadComponent
     ],
     providers: [UploadService]

@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="state">
+    <mat-spinner *ngSwitchCase="State.ongoing" diameter="24"></mat-spinner>
+    <mat-icon *ngSwitchCase="State.done" class="success">check_circle</mat-icon>
+    <mat-icon *ngSwitchCase="State.error" class="error" [matTooltip]="errorMessage">error</mat-icon>
+</ng-container>

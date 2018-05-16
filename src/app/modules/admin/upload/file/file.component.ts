@@ -23,8 +23,6 @@ export class FileComponent {
     ) { }
 
     onUploadOutput(output: UploadOutput): void {
-        console.log(output.type);
-        console.log(output);
         if (output.type === "allAddedToQueue") {
             this.error = null;
 

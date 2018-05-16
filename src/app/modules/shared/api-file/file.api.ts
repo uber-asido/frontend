@@ -8,7 +8,7 @@ import { QueryBuilder } from "../wheeler";
 export interface UploadHistory {
     key: string;
     filename: string;
-    status: "Ongoing" | "Done";
+    status: "Pending" | "Done";
     timestamp: moment.Moment;
     timestampFromNow: string;
     errors: string[];

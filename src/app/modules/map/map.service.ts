@@ -1,19 +1,12 @@
 import { Injectable } from "@angular/core";
 
+import { FilmingLocationApi, FilmingLocation } from "../shared/api-filming-location";
 import { SearchApi, SearchItem, SearchItemType } from "../shared/api-search";
 
-export { SearchItem, SearchItemType };
-
-export class FilmLocation {
-    constructor(
-        public readonly latitude: number,
-        public readonly longitude: number,
-        public readonly title: string
-    ) { }
-}
+export { FilmingLocation, SearchItem, SearchItemType };
 
 export class MapState {
-    public locations: FilmLocation[] = [];
+    public locations: FilmingLocation[] = [];
     public loadingLocations = false;
     public currentSearch: SearchItem = null;
 }
@@ -22,13 +15,18 @@ export class MapState {
 export class MapService {
     public readonly state = new MapState();
 
-    constructor(private readonly searchApi: SearchApi) {
-        this.state.locations = Array.from(Array(1000).keys())
-            .map(e => new FilmLocation(37.0 + Math.random(), -123.0 + Math.random(), ""));
+    constructor(
+        private readonly filmingLocationApi: FilmingLocationApi,
+        private readonly searchApi: SearchApi
+    ) {
     }
 
-    public autocompleteSearch(text: string): Promise<SearchItem[]> {
+    public fetchAutocompletion(text: string): Promise<SearchItem[]> {
         return this.searchApi.getSearchItems(text, 20);
+    }
+
+    public async fetchFilmingLocations(forSearchItem: SearchItem): Promise<void> {
+        this.state.locations = await this.filmingLocationApi.getFilmingLocations();
     }
 
     public setCurrentSearch(search: SearchItem): void {

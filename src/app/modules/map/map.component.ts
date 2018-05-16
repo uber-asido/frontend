@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { FilmLocation, MapService } from "./map.service";
+import { FilmingLocation, MapService } from "./map.service";
 import { Location } from "./google-map";
 
 @Component({
@@ -8,12 +8,16 @@ import { Location } from "./google-map";
     templateUrl: './map.component.html',
     styleUrls: ['./map.component.scss']
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
     public get locations() { return this.mapService.state.locations; }
 
     constructor(private readonly mapService: MapService) { }
 
-    public onLocationSelected(location: FilmLocation): void {
+    ngOnInit() {
+        this.mapService.fetchFilmingLocations(null);
+    }
+
+    public onLocationSelected(location: FilmingLocation): void {
         console.log(location);
     }
 }

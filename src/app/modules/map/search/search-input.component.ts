@@ -27,7 +27,7 @@ export class SearchInputComponent {
         map(value => typeof value === "string"? value : value.text),
         map(value => value.trim().toLowerCase()),
         tap(value => { if (!value) this.clearCurrentSearch(); }),
-        flatMap(value => this.mapService.autocompleteSearch(value))
+        flatMap(value => this.mapService.fetchAutocompletion(value))
     );
 
     public get Action() { return Action; }

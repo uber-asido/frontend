@@ -1,0 +1,53 @@
+$blue: #38A2FB;
+$purple: #5754A3;
+$border: #EDEDED;
+$grey: #D7D8D7;
+$green: #93E777;
+$red: #C11161;
+$text: #74809D;
+$text-light: #C0C4C7;
+$border: #D2D6DA;
+
+:host {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+.drop-container {
+    background: #fff;
+    border-radius: 6px;
+    height: 150px;
+    width: 100%;
+    box-shadow: 1px 2px 20px rgba(#000, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed $text-light;
+    position: relative;
+
+    p {
+        font-size: 16px;
+        font-weight: 400;
+        color: $text-light;
+
+        &.error {
+            position: absolute;
+            bottom: 10px;
+            color: $red;
+            font-size: 14px;
+        }
+
+        .upload-button {
+            display: inline-block;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: $purple;
+
+            input {
+                display: none;
+            }
+        }
+    }
+}

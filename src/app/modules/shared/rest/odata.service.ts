@@ -6,6 +6,11 @@ interface ODataResponseMulti<TEntity> {
     value: TEntity[];
 }
 
+export interface ODataError {
+    target: string;
+    message: string;
+}
+
 @Injectable()
 export class ODataService {
     public get<TEntity>(url: string): Promise<TEntity> {
@@ -51,5 +56,13 @@ export class ODataService {
     public async deleteMulti<TEntity>(url: string): Promise<TEntity[]> {
         const response = await xhr<ODataResponseMulti<TEntity>>(url, "DELETE", null, null);
         return response.value;
+    }
+
+    public parseError(response: any): ODataError[] {
+        if (!response || response.code !== "InvalidModel" || !response.details || !response.details.forEach) {
+            return null;
+        }
+
+        return response.details;
     }
 }

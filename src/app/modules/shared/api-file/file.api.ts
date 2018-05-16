@@ -32,8 +32,17 @@ export class FileApi {
         return this.odata.get<number>(`/UploadHistory/$count`);
     }
 
-    private bind(entity: UploadHistory): void {
+    public async uploadFile(file: Blob, progress: (percent: number) => void): Promise<UploadHistory> {
+        const body = new FormData();
+        body.append("file", file);
+
+        const result = await this.odata.post<UploadHistory>("/UploadFile", body, progress);
+        return result;
+    }
+
+    public bind(entity: UploadHistory): UploadHistory {
         entity.timestamp = Binder.bindMoment(entity.timestamp);
         entity.timestampFromNow = entity.timestamp.fromNow();
+        return entity;
     }
 }

@@ -23,6 +23,16 @@ export class UploadService {
         private readonly snackbar: MatSnackBar
     ) { }
 
+    public appendUploadHistory(history: UploadHistory): void {
+        const copy = this.state.uploadHistory.slice(0);
+        if (copy.length === this.state.pageSize) {
+            copy.pop();
+        }
+        copy.push(history);
+        copy.sort((a, b) => a.timestamp < b.timestamp ? 1 : -1);
+        this.state.uploadHistory = copy;
+    }
+
     public async reloadUploadHistory(): Promise<void> {
         this.state.loading = true;
 

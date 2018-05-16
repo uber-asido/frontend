@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent } from "@angular/material";
 import { Observable } from "rxjs";
-import { flatMap, map, startWith, tap } from "rxjs/operators";
+import { debounceTime, flatMap, map, startWith, tap } from "rxjs/operators";
 
 import { MapService, SearchItem, SearchItemType } from "../map.service";
 
@@ -27,6 +27,7 @@ export class SearchInputComponent {
         map(value => typeof value === "string"? value : value.text),
         map(value => value.trim().toLowerCase()),
         tap(value => { if (!value) this.clearCurrentSearch(); }),
+        debounceTime(200),
         flatMap(value => this.mapService.fetchAutocompletion(value))
     );
 
@@ -69,6 +70,7 @@ export class SearchInputComponent {
 
     public onOptionSelected(event: MatAutocompleteSelectedEvent): void {
         const searchItem = event.option.value;
+        this.searchInput.blur();
         this.mapService.setCurrentSearch(searchItem);
     }
 

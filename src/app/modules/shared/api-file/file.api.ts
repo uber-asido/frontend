@@ -20,15 +20,16 @@ export class FileApi {
     constructor(@Inject(forwardRef(() => ODataService)) private readonly odata: ODataService) { }
 
     public async getUploadHistory(page: number, pageSize: number): Promise<UploadHistory[]> {
-        const query = (page > 0 ? this.queryBuilder.skip(pageSize * page) : this.queryBuilder).top(pageSize);
+        const query = (page > 0 ? this.queryBuilder.skip(pageSize * page) : this.queryBuilder)
+            .orderByDescending(e => e.timestamp)
+            .top(pageSize);
         const entities = await this.odata.getMulti<UploadHistory>(`/UploadHistory?${query.toQueryString()}`);
         entities.forEach(e => this.bind(e));
         return entities;
     }
 
     public getUploadHistoryCount(): Promise<number> {
-        console.log("TODO: Implement me! getUploadHistoryCount()");
-        return Promise.resolve(439);
+        return this.odata.get<number>(`/UploadHistory/$count`);
     }
 
     private bind(entity: UploadHistory): void {

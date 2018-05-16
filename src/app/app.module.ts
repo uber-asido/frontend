@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { routes } from "./app.routes";
 
 import { BrowserGlobalsModule } from "./modules/shared/browser-globals";
+import { NavigationModule } from "./modules/shared/navigation";
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { BrowserGlobalsModule } from "./modules/shared/browser-globals";
         OverlayModule,
 
         BrowserGlobalsModule,
+        NavigationModule,
 
         routes
     ],

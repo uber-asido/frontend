@@ -50,6 +50,15 @@ export class SearchInputComponent {
         return item ? item.text : undefined;
     }
 
+    public optionTooltip(item: SearchItem): string {
+        switch (item.type) {
+            case SearchItemType.movie: return "Movie";
+            case SearchItemType.organization: return "Organization";
+            case SearchItemType.person: return "Person";
+            default: throw Error(`Unknown type: ${JSON.stringify(item)}`);
+        }
+    }
+
     public onActionSearch(): void {
         this.searchInput.focus();
     }

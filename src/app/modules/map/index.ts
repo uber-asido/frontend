@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressSpinnerModule, MatSnackBarModule } from "@angular/material";
+import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressSpinnerModule, MatSnackBarModule, MatTooltipModule } from "@angular/material";
 
 import { ApiFilmingLocationModule } from "../shared/api-filming-location";
 import { ApiSearchModule } from "../shared/api-search";
@@ -32,6 +32,7 @@ import { routes } from "./map.routes";
         MatOptionModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,
+        MatTooltipModule,
 
         ApiFilmingLocationModule,
         ApiSearchModule,

@@ -13,7 +13,7 @@
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction" (optionSelected)="onOptionSelected($event)">
     <ng-container *ngFor="let option of autocompleteOptions | async">
         <mat-option [value]="option">
-            <mat-icon>{{ option.type | searchItemIcon }}</mat-icon>
+            <mat-icon [matTooltip]="optionTooltip(option)">{{ option.type | searchItemIcon }}</mat-icon>
             <span>{{ option.text }}</span>
         </mat-option>
     </ng-container>

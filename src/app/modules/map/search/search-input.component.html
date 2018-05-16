@@ -1,4 +1,4 @@
-<input #searchInput placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="searchControl" />
+<input #searchInput placeholder="Search movie location" [matAutocomplete]="auto" [formControl]="searchControl" (keydown.enter)="onEnter()" />
 <div class="action-container">
     <ng-container [ngSwitch]="visibleAction">
         <button *ngSwitchCase="Action.search" mat-icon-button (click)="onActionSearch()">

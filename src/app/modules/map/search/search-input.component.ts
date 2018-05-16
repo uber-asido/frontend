@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { MatAutocompleteSelectedEvent } from "@angular/material";
+import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from "@angular/material";
 import { Observable } from "rxjs";
 import { debounceTime, flatMap, map, startWith, tap } from "rxjs/operators";
 
@@ -20,6 +20,8 @@ enum Action {
 export class SearchInputComponent {
     @ViewChild("searchInput") searchInputRef: ElementRef;
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
+
+    @ViewChild(MatAutocompleteTrigger) autocompleteTrigger: MatAutocompleteTrigger;
 
     public readonly searchControl = new FormControl();
     public readonly autocompleteOptions: Observable<SearchItem[]> = this.searchControl.valueChanges.pipe(
@@ -68,10 +70,21 @@ export class SearchInputComponent {
         this.clearCurrentSearch();
     }
 
+    public onEnter(): void {
+        const value = this.searchInput.value.trim();
+        if (!value) {
+            return;
+        }
+
+        this.setCurrentSearch({
+            key: null,
+            text: value,
+            type: SearchItemType.freeText
+        });
+    }
+
     public onOptionSelected(event: MatAutocompleteSelectedEvent): void {
-        const searchItem = event.option.value;
-        this.searchInput.blur();
-        this.mapService.setCurrentSearch(searchItem);
+        this.setCurrentSearch(event.option.value);
     }
 
     private clearCurrentSearch(): void {
@@ -79,5 +92,11 @@ export class SearchInputComponent {
             this.searchControl.setValue("");
         }
         this.mapService.setCurrentSearch(null);
+    }
+
+    private setCurrentSearch(item: SearchItem): void {
+        this.searchInput.blur();
+        this.autocompleteTrigger.closePanel();
+        this.mapService.setCurrentSearch(item);
     }
 }

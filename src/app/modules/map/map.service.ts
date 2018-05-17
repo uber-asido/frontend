@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material";
 
 import { FilmingLocationApi, FilmingLocation } from "../shared/api-filming-location";
+import { Movie, MovieApi } from "../shared/api-movie";
 import { SearchApi, SearchItem, SearchItemType } from "../shared/api-search";
 
 export { FilmingLocation, SearchItem, SearchItemType };
@@ -10,6 +11,7 @@ export class MapState {
     public locations: FilmingLocation[] = [];
     public loadingLocations = false;
     public currentSearch: SearchItem = null;
+    public selectedMovie: Movie;
 }
 
 @Injectable()
@@ -18,6 +20,7 @@ export class MapService {
 
     constructor(
         private readonly filmingLocationApi: FilmingLocationApi,
+        private readonly movieApi: MovieApi,
         private readonly searchApi: SearchApi,
         private readonly snackbar: MatSnackBar
     ) {
@@ -47,5 +50,9 @@ export class MapService {
         } finally {
             this.state.loadingLocations = false;
         }
+    }
+
+    public async selectMovie(movieKey: string): Promise<void> {
+        this.state.selectedMovie = await this.movieApi.get(movieKey);
     }
 }

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule, MatButtonModule, MatDividerModule, MatIconModule, MatInputModule, MatOptionModule, MatProgressSpinnerModule, MatSnackBarModule, MatTooltipModule } from "@angular/material";
 
 import { ApiFilmingLocationModule } from "../shared/api-filming-location";
+import { ApiMovieModule } from "../shared/api-movie";
 import { ApiSearchModule } from "../shared/api-search";
 import { ScriptLoaderModule } from "../shared/script-loader";
 import { MapService } from "./map.service";
@@ -35,6 +36,7 @@ import { routes } from "./map.routes";
         MatTooltipModule,
 
         ApiFilmingLocationModule,
+        ApiMovieModule,
         ApiSearchModule,
         ScriptLoaderModule,
 

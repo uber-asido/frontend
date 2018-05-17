@@ -13,7 +13,7 @@ export class MapComponent {
 
     constructor(private readonly mapService: MapService) { }
 
-    public onLocationSelected(location: FilmingLocation): void {
-        console.log(location);
+    public async onLocationSelected(location: FilmingLocation): Promise<void> {
+        await this.mapService.selectMovie(location.movieKey);
     }
 }

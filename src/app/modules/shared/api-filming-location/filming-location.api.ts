@@ -32,6 +32,6 @@ export class FilmingLocationApi {
     }
 
     public searchBySearchItem(searchItemKey: string): Promise<FilmingLocation[]> {
-        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchBySearchItem(searchItemKey='${encodeURIComponent(searchItemKey)}')?$select=${FilmingLocationApi.odataSelect}`);
+        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchBySearchItem(searchItemKey=${encodeURIComponent(searchItemKey)})?$select=${FilmingLocationApi.odataSelect}`);
     }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material";
 
 import { FilmingLocationApi, FilmingLocation } from "../shared/api-filming-location";
 import { SearchApi, SearchItem, SearchItemType } from "../shared/api-search";
@@ -17,7 +18,8 @@ export class MapService {
 
     constructor(
         private readonly filmingLocationApi: FilmingLocationApi,
-        private readonly searchApi: SearchApi
+        private readonly searchApi: SearchApi,
+        private readonly snackbar: MatSnackBar
     ) {
     }
 
@@ -25,11 +27,25 @@ export class MapService {
         return this.searchApi.getSearchItems(text, 20);
     }
 
-    public async fetchFilmingLocations(forSearchItem: SearchItem): Promise<void> {
-        this.state.locations = await this.filmingLocationApi.getFilmingLocations();
-    }
-
-    public setCurrentSearch(search: SearchItem): void {
+    public async setCurrentSearch(search: SearchItem): Promise<void> {
         this.state.currentSearch = search;
+
+        this.state.loadingLocations = true;
+        try {
+            if (search) {
+                if (search.type === SearchItemType.freeText) {
+                    this.state.locations = await this.filmingLocationApi.searchByFreeText(search.text);
+                } else {
+                    this.state.locations = await this.filmingLocationApi.searchBySearchItem(search.key);
+                }
+            } else {
+                this.state.locations = await this.filmingLocationApi.all();
+            }
+        } catch (error) {
+            console.warn(error);
+            this.snackbar.open("Failed to load locations :(", "Dismiss", { duration: 5000 });
+        } finally {
+            this.state.loadingLocations = false;
+        }
     }
 }

@@ -14,16 +14,24 @@ export interface FilmingLocation {
 }
 
 export class FilmingLocationApi {
+    // Optimization - select properties that are needed for the UI only.
+    private static readonly odataSelect = encodeURIComponent([
+        Expression.nameof<FilmingLocation, string>(e => e.movieKey),
+        Expression.nameof<FilmingLocation, number>(e => e.latitude),
+        Expression.nameof<FilmingLocation, number>(e => e.longitude)
+    ].join(","));
+
     constructor(@Inject(forwardRef(() => ODataService)) private readonly odata: ODataService) { }
 
-    public async getFilmingLocations(): Promise<FilmingLocation[]> {
-        // Optimization - select properties that are needed for the UI only.
-        const select = [
-            Expression.nameof<FilmingLocation, string>(e => e.movieKey),
-            Expression.nameof<FilmingLocation, number>(e => e.latitude),
-            Expression.nameof<FilmingLocation, number>(e => e.longitude)
-        ].join(",");
-        const entities = await this.odata.get<FilmingLocation[]>(`/FilmingLocation?$select=${encodeURIComponent(select)}`);
-        return entities;
+    public all(): Promise<FilmingLocation[]> {
+        return this.odata.get<FilmingLocation[]>(`/FilmingLocation?$select=${FilmingLocationApi.odataSelect}`);
+    }
+
+    public searchByFreeText(text: string): Promise<FilmingLocation[]> {
+        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchByFreeText(text='${encodeURIComponent(text)}')?$select=${FilmingLocationApi.odataSelect}`);
+    }
+
+    public searchBySearchItem(searchItemKey: string): Promise<FilmingLocation[]> {
+        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchBySearchItem(searchItemKey='${encodeURIComponent(searchItemKey)}')?$select=${FilmingLocationApi.odataSelect}`);
     }
 }

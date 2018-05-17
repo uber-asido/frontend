@@ -1,2 +1,3 @@
 <ub-google-map [locations]="locations" (locationSelected)="onLocationSelected($event)"></ub-google-map>
-<ub-search-input></ub-search-input>
+<ub-movie-details *ngIf="!!selectedMovie" [movie]="selectedMovie"></ub-movie-details>
+<ub-search-input [class.with-shadow]="!!selectedMovie" [selectedSearchItem]="selectedSearchItem"></ub-search-input>

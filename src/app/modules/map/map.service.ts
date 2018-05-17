@@ -10,7 +10,7 @@ export { FilmingLocation, SearchItem, SearchItemType };
 export class MapState {
     public locations: FilmingLocation[] = [];
     public loadingLocations = false;
-    public currentSearch: SearchItem = null;
+    public selectedSearchItem: SearchItem = null;
     public selectedMovie: Movie;
 }
 
@@ -30,8 +30,8 @@ export class MapService {
         return this.searchApi.getSearchItems(text, 20);
     }
 
-    public async setCurrentSearch(search: SearchItem): Promise<void> {
-        this.state.currentSearch = search;
+    public async selectSearchItem(search: SearchItem): Promise<void> {
+        this.state.selectedSearchItem = search;
 
         this.state.loadingLocations = true;
         try {
@@ -42,6 +42,7 @@ export class MapService {
                     this.state.locations = await this.filmingLocationApi.searchBySearchItem(search.key);
                 }
             } else {
+                this.deselectMovie();
                 this.state.locations = await this.filmingLocationApi.all();
             }
         } catch (error) {
@@ -54,5 +55,10 @@ export class MapService {
 
     public async selectMovie(movieKey: string): Promise<void> {
         this.state.selectedMovie = await this.movieApi.get(movieKey);
+        this.state.selectedSearchItem = { key: null, text: this.state.selectedMovie.title, type: SearchItemType.freeText };
+    }
+
+    public deselectMovie(): void {
+        this.state.selectedMovie = null;
     }
 }

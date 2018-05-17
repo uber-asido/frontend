@@ -1,0 +1,26 @@
+@import "~variables.scss";
+
+:host {
+    background-color: white;
+}
+
+.header {
+    padding: 80px 24px 20px 24px;
+    color: white;
+    background-color: $primary-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: Roboto, Arial, sans-serif;
+
+    .title {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+}
+
+.mat-list-icon {
+    color: $primary-color;
+}

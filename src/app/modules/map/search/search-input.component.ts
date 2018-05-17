@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from "@angular/material";
 import { Observable } from "rxjs";
@@ -17,7 +17,9 @@ enum Action {
     templateUrl: './search-input.component.html',
     styleUrls: ['./search-input.component.scss']
 })
-export class SearchInputComponent {
+export class SearchInputComponent implements OnChanges {
+    @Input() selectedSearchItem: SearchItem;
+
     @ViewChild("searchInput") searchInputRef: ElementRef;
     private get searchInput(): HTMLInputElement { return this.searchInputRef.nativeElement; }
 
@@ -36,11 +38,11 @@ export class SearchInputComponent {
     public get Action() { return Action; }
     public get visibleAction() {
         const state = this.mapService.state;
-        if (!state.loadingLocations && !state.currentSearch) {
+        if (!state.loadingLocations && !state.selectedSearchItem) {
             return Action.search;
         } else if (state.loadingLocations) {
             return Action.loading;
-        } else if (state.currentSearch) {
+        } else if (state.selectedSearchItem) {
             return Action.clear;
         } else {
             throw Error("Can't decide visible action");
@@ -48,6 +50,13 @@ export class SearchInputComponent {
     }
 
     constructor(private readonly mapService: MapService) { }
+
+    ngOnChanges(changes: SimpleChanges) {
+        const searchItem = changes["selectedSearchItem"];
+        if (searchItem && searchItem.currentValue) {
+            this.searchInput.value = searchItem.currentValue.text;
+        }
+    }
 
     public displayFunction(item?: SearchItem): string {
         return item ? item.text : undefined;
@@ -91,12 +100,12 @@ export class SearchInputComponent {
         if (this.searchControl.value) {
             this.searchControl.setValue("");
         }
-        this.mapService.setCurrentSearch(null);
+        this.mapService.selectSearchItem(null);
     }
 
     private setCurrentSearch(item: SearchItem): void {
         this.searchInput.blur();
         this.autocompleteTrigger.closePanel();
-        this.mapService.setCurrentSearch(item);
+        this.mapService.selectSearchItem(item);
     }
 }

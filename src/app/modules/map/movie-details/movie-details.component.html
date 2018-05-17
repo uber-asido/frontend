@@ -1,0 +1,46 @@
+<div class="header">
+    <div class="title">{{movie.title}}</div>
+</div>
+<mat-list>
+    <h3 mat-subheader>Release year</h3>
+    <mat-list-item>
+        <mat-icon mat-list-icon>date_range</mat-icon>
+        <h4 mat-line>{{movie.releaseYear}}</h4>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Director</h3>
+    <mat-list-item *ngFor="let person of movie.directors; let index=index">
+        <mat-icon *ngIf="index === 0" mat-list-icon>person</mat-icon>
+        <mat-icon *ngIf="index > 0" mat-list-icon></mat-icon>
+        <p mat-line>{{person.fullName}}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Writers</h3>
+    <mat-list-item *ngFor="let person of movie.writers; let index=index">
+        <mat-icon *ngIf="index === 0" mat-list-icon>person</mat-icon>
+        <mat-icon *ngIf="index > 0" mat-list-icon></mat-icon>
+        <p mat-line>{{person.fullName}}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Actors</h3>
+    <mat-list-item *ngFor="let person of movie.actors; let index=index">
+        <mat-icon *ngIf="index === 0" mat-list-icon>person</mat-icon>
+        <mat-icon *ngIf="index > 0" mat-list-icon></mat-icon>
+        <p mat-line>{{person.fullName}}</p>
+    </mat-list-item>
+
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Production company</h3>
+    <mat-list-item *ngFor="let organization of movie.productionCompanies; let index=index">
+        <mat-icon *ngIf="index === 0" mat-list-icon>business</mat-icon>
+        <mat-icon *ngIf="index > 0" mat-list-icon></mat-icon>
+        <p mat-line>{{organization.name}}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Distributor</h3>
+    <mat-list-item *ngFor="let organization of movie.distributors; let index=index">
+        <mat-icon *ngIf="index === 0" mat-list-icon>business</mat-icon>
+        <mat-icon *ngIf="index > 0" mat-list-icon></mat-icon>
+        <p mat-line>{{organization.name}}</p>
+    </mat-list-item>
+</mat-list>

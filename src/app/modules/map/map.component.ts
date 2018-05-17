@@ -10,6 +10,8 @@ import { Location } from "./google-map";
 })
 export class MapComponent {
     public get locations() { return this.mapService.state.locations; }
+    public get selectedSearchItem() { return this.mapService.state.selectedSearchItem; }
+    public get selectedMovie() { return this.mapService.state.selectedMovie; }
 
     constructor(private readonly mapService: MapService) { }
 

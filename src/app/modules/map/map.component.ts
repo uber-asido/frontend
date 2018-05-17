@@ -18,4 +18,8 @@ export class MapComponent {
     public async onLocationSelected(location: FilmingLocation): Promise<void> {
         await this.mapService.selectMovie(location.movieKey);
     }
+
+    public onLocationDeselected(): void {
+        this.mapService.selectSearchItem(null);
+    }
 }

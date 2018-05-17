@@ -42,7 +42,8 @@ export class MapService {
                     this.state.locations = await this.filmingLocationApi.searchBySearchItem(search.key);
                 }
             } else {
-                this.deselectMovie();
+                this.state.selectedSearchItem = null;
+                this.state.selectedMovie = null;
                 this.state.locations = await this.filmingLocationApi.all();
             }
         } catch (error) {
@@ -56,9 +57,5 @@ export class MapService {
     public async selectMovie(movieKey: string): Promise<void> {
         this.state.selectedMovie = await this.movieApi.get(movieKey);
         this.state.selectedSearchItem = { key: null, text: this.state.selectedMovie.title, type: SearchItemType.freeText };
-    }
-
-    public deselectMovie(): void {
-        this.state.selectedMovie = null;
     }
 }

@@ -53,8 +53,8 @@ export class SearchInputComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         const searchItem = changes["selectedSearchItem"];
-        if (searchItem && searchItem.currentValue) {
-            this.searchInput.value = searchItem.currentValue.text;
+        if (searchItem) {
+            this.searchInput.value = searchItem.currentValue ? searchItem.currentValue.text : "";
         }
     }
 

@@ -24,6 +24,7 @@ class MarkerIcon {
 export class GoogleMapComponent implements AfterViewInit, OnChanges {
     @Input() locations: Location[];
     @Output() readonly locationSelected = new EventEmitter<Location>();
+    @Output() readonly locationDeselected = new EventEmitter<void>();
 
     @ViewChild("map") mapRef: ElementRef;
 
@@ -66,6 +67,7 @@ export class GoogleMapComponent implements AfterViewInit, OnChanges {
         if (this.selectedMarker) {
             this.selectedMarker.setIcon(MarkerIcon.deselected);
             this.selectedMarker = null;
+            this.zone.run(() => this.locationDeselected.emit());
         }
     }
 

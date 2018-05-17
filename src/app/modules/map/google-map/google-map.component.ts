@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSnackBar } from "@angular/material";
 
 import { GoogleMapLoader } from "./google-map.loader";
@@ -33,6 +33,7 @@ export class GoogleMapComponent implements AfterViewInit, OnChanges {
     private clusterer: any;
 
     constructor(
+        private readonly zone: NgZone,
         private readonly snackbar: MatSnackBar,
         private readonly googleMapLoader: GoogleMapLoader
     ) { }
@@ -95,7 +96,7 @@ export class GoogleMapComponent implements AfterViewInit, OnChanges {
                 }
                 this.selectedMarker = marker;
                 marker.setIcon(MarkerIcon.selected);
-                this.locationSelected.emit(location);
+                this.zone.run(() => this.locationSelected.emit(location));
             });
 
             this.markers.push(marker);

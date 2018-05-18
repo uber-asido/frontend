@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class Concat extends MethodExpression {
 
@@ -9,5 +9,5 @@ export class Concat extends MethodExpression {
         this.expressions = [left, right];
     }
 
-    public methodName: string = 'concat';
+    public methodName: string = "concat";
 }

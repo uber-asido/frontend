@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class Substring extends MethodExpression {
 
@@ -13,5 +13,5 @@ export class Substring extends MethodExpression {
         }
     }
 
-    public methodName: string = 'substring';
+    public methodName: string = "substring";
 }

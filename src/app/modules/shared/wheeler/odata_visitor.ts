@@ -1,16 +1,16 @@
-import {BinaryExpression} from './expressions/binary_expression';
-import {IExpressionVisitor} from './expressions/iexpression_visitor';
-import {MethodExpression} from './expressions/method_expression';
-import {UnaryExpression} from './expressions/unary_expression';
-import {ValueExpression} from './expressions/value_expression';
-import {PropertyExpression} from './expressions/property_expression';
-import {LambdaExpression} from './expressions/lambda_expression';
+import { BinaryExpression } from "./expressions/binary_expression";
+import { IExpressionVisitor } from "./expressions/iexpression_visitor";
+import { MethodExpression } from "./expressions/method_expression";
+import { UnaryExpression } from "./expressions/unary_expression";
+import { ValueExpression } from "./expressions/value_expression";
+import { PropertyExpression } from "./expressions/property_expression";
+import { LambdaExpression } from "./expressions/lambda_expression";
 
 export class ODataVisitor implements IExpressionVisitor {
     private items: string[] = [];
 
     public result(): string {
-        let result: string = '';
+        let result: string = "";
         if (this.items.length) {
             result = this.items[this.items.length - 1];
         }
@@ -60,7 +60,7 @@ export class ODataVisitor implements IExpressionVisitor {
         let val = ex.value();
         if (val instanceof Date) {
             result = `datetime'${val.toISOString()}'`;
-        } else if (typeof val === 'string') {
+        } else if (typeof val === "string") {
             let isRegex = val.match(/[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}/);
             result = isRegex ? `guid'${ex.value().toString()}'` : `'${ex.value().toString()}'`;
         } else {
@@ -80,7 +80,7 @@ export class ODataVisitor implements IExpressionVisitor {
             results.push(this.items.pop());
         }
 
-        this.items.push(`${ex.methodName}(${results.reverse().join(',')})`);
+        this.items.push(`${ex.methodName}(${results.reverse().join(",")})`);
     }
 
     private visitLambdaExpression(ex: LambdaExpression): void {

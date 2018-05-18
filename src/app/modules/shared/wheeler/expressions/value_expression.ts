@@ -1,5 +1,5 @@
-import {IExpression} from './iexpression';
-import {IExpressionVisitor} from './iexpression_visitor';
+import { IExpression } from "./iexpression";
+import { IExpressionVisitor } from "./iexpression_visitor";
 
 export class ValueExpression implements IExpression {
     constructor(private item: any) {

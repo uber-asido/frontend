@@ -1,5 +1,5 @@
-import {BinaryExpression} from '../expressions/binary_expression';
+import { BinaryExpression } from "../expressions/binary_expression";
 
 export class GreaterThan extends BinaryExpression {
-    public operator: string = 'gt';
+    public operator: string = "gt";
 }

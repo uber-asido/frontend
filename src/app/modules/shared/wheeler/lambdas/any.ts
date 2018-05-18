@@ -1,5 +1,5 @@
-import {LambdaExpression} from '../expressions/lambda_expression';
+import { LambdaExpression } from "../expressions/lambda_expression";
 
 export class Any extends LambdaExpression {
-    public methodName: string = 'any';
+    public methodName: string = "any";
 }

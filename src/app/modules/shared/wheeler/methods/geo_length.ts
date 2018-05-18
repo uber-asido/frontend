@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class GeoLength extends MethodExpression {
 
@@ -9,5 +9,5 @@ export class GeoLength extends MethodExpression {
         this.expressions = [ex];
     }
 
-    public methodName: string = 'geo.length';
+    public methodName: string = "geo.length";
 }

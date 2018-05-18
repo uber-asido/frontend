@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class StartsWith extends MethodExpression {
 
@@ -9,5 +9,5 @@ export class StartsWith extends MethodExpression {
         this.expressions = [left, right];
     }
 
-    public methodName: string = 'startswith';
+    public methodName: string = "startswith";
 }

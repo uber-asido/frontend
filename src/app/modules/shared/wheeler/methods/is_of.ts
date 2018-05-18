@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class IsOf extends MethodExpression {
     constructor(left: IExpression)
@@ -13,5 +13,5 @@ export class IsOf extends MethodExpression {
         }
     }
 
-    public methodName: string = 'isof';
+    public methodName: string = "isof";
 }

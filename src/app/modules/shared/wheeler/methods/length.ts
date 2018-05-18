@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class Length extends MethodExpression {
 
@@ -9,5 +9,5 @@ export class Length extends MethodExpression {
         this.expressions = [ex];
     }
 
-    public methodName: string = 'length';
+    public methodName: string = "length";
 }

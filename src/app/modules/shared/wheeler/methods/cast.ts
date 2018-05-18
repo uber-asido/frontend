@@ -1,5 +1,5 @@
-import {MethodExpression} from '../expressions/method_expression';
-import {IExpression} from '../expressions/iexpression';
+import { MethodExpression } from "../expressions/method_expression";
+import { IExpression } from "../expressions/iexpression";
 
 export class Cast extends MethodExpression {
     constructor(left: IExpression)
@@ -14,5 +14,5 @@ export class Cast extends MethodExpression {
         }
     }
 
-    public methodName: string = 'cast';
+    public methodName: string = "cast";
 }

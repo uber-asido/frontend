@@ -1,8 +1,8 @@
-import {Add, And, Divide, Equals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Modulo, Multiply, NotEquals, Or, Subtract  } from './filters';
-import {Cast, Length, Contains, Trim, Now} from './methods';
-import {IExpression} from './expressions/iexpression';
-import {UnaryExpression, BinaryExpression, ValueExpression, PropertyExpression, MethodExpression} from './expressions';
-import {All, Any} from './lambdas';
+import { Add, And, Divide, Equals, GreaterThan, GreaterThanOrEqualTo, LessThan, LessThanOrEqualTo, Modulo, Multiply, NotEquals, Or, Subtract } from './filters';
+import { Cast, Length, Contains, Trim, Now } from './methods';
+import { IExpression } from './expressions/iexpression';
+import { UnaryExpression, BinaryExpression, ValueExpression, PropertyExpression, MethodExpression } from './expressions';
+import { All, Any } from './lambdas';
 
 export class Expression {
     public static add(left: number, right: number): IExpression
@@ -92,9 +92,9 @@ export class Expression {
 
     public static nameof<Type, T>(param: (type: Type) => T): string {
         // Replace with nameof when typescript adds it.
-        let varExtractor = new RegExp('return (.*);');
+        let varExtractor = new RegExp("return (.*);");
         // HACK: cast to a string.
-        let m = varExtractor.exec(param + '');
+        let m = varExtractor.exec(param + "");
         if (m == null) {
             throw new Error(`Cannot find return type for param (value: ${param})`);
         }
@@ -102,9 +102,9 @@ export class Expression {
         let returnValue = m[1];
 
         // drop the first lambda (that's the root object)
-        let splits = returnValue.split('.');
+        let splits = returnValue.split(".");
         splits.shift();
-        return splits.join().replace(',', '/');
+        return splits.join().replace(",", "/");
     }
 
     public static not_equals<Type, T>(param: (type: Type) => T, value: IExpression): IExpression
@@ -189,7 +189,7 @@ export class Expression {
     }
 
     private static expressionOrValue(value: any): IExpression {
-        if (typeof value === 'function') {
+        if (typeof value === "function") {
             value = new PropertyExpression(Expression.nameof(value));
         } else if (!value.accept) {
             value = new ValueExpression(value)

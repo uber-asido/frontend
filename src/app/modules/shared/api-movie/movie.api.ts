@@ -4,7 +4,6 @@ import { Inject, forwardRef } from "@angular/core";
 
 import { FilmingLocation } from "../api-filming-location";
 import { Binder, ODataService } from "../rest";
-import { Expression } from "../wheeler";
 
 export interface Actor {
     key: string;

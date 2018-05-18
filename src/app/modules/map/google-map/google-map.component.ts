@@ -105,6 +105,7 @@ export class GoogleMapComponent implements AfterViewInit, OnChanges {
         });
         
         this.clusterer = new MarkerClusterer(this.map, this.markers);
+        this.clusterer.setMaxZoom(21);
     }
 
     private readonly config = {

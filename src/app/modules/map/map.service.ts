@@ -10,7 +10,7 @@ export { FilmingLocation, SearchItem, SearchItemType };
 export class MapState {
     public locations: FilmingLocation[] = [];
     public loadingLocations = false;
-    public selectedSearchItem: SearchItem = undefined;
+    public selectedSearchItem: SearchItem = null;
     public selectedMovie: Movie;
 }
 
@@ -24,6 +24,7 @@ export class MapService {
         private readonly searchApi: SearchApi,
         private readonly snackbar: MatSnackBar
     ) {
+        this.filmingLocationApi.all().then(loc => this.state.locations = loc);
     }
 
     public fetchAutocompletion(text: string): Promise<SearchItem[]> {

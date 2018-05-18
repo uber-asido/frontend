@@ -1,6 +1,6 @@
 # SF Movies frontend
 
-The purpose of the client is to fetch the data from the (backend)[https://github.com/uber-asido/backend] and visually present it on a map. Among the features the client includes:
+The purpose of the client is to fetch the data from the [backend](https://github.com/uber-asido/backend) and visually present it on a map. The client uses Angular framework and is written in TypeScript. Among the features it includes:
 * Map point clustering
 * Show movie details on map point click
 * Search with autocompletion
@@ -8,7 +8,7 @@ The purpose of the client is to fetch the data from the (backend)[https://github
 
 ## Source code structure
 
-The source code follows (Angular suggested structure and coding style)[https://angular.io/guide/styleguide]. It is a long read, so here are the highlights:
+The source code follows [Angular suggested structure and coding style](https://angular.io/guide/styleguide). It is a long read, so here are the highlights:
 
 Directory | Description
 --- | ---

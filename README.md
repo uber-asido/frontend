@@ -1,20 +1,35 @@
-# Frontend
+# SF Movies frontend
 
-The frontend of SF Movies project.
+The purpose of the client is to fetch the data from the (backend)[https://github.com/uber-asido/backend] and visually present it on a map. Among the features the client includes:
+* Map point clustering
+* Show movie details on map point click
+* Search with autocompletion
+* Admin page with ability to upload files with more data
+
+## Source code structure
+
+The source code follows (Angular suggested structure and coding style)[https://angular.io/guide/styleguide]. It is a long read, so here are the highlights:
+
+Directory | Description
+--- | ---
+src/main.ts | The main entry point
+src/app/ | App components
+src/app/modules/ | Each standalone section with routing has it's own module defined here. Section modules are lazy-loaded.
+src/app/modules/shared/ | Modules used by sections, that aren't standalone and have no routing. 
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+Available routes:
+
+Route | Description
+--- | ---
+/ | Map section.
+/admin | Admin section currently containing upload management.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+To create a docker image run `docker build -t uber-frontend .`

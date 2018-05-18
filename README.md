@@ -33,3 +33,6 @@ Route | Description
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 To create a docker image run `docker build -t uber-frontend .`
+
+## Related projects
+[SF Movies backend](https://github.com/uber-asido/backend)

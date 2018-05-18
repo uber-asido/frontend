@@ -82,7 +82,10 @@ export class GoogleMapComponent implements AfterViewInit, OnChanges {
             this.clusterer.setMap(null);
         }
 
-        this.markers.forEach(e => e.setMap(null));
+        this.markers.forEach(m => {
+            google.maps.event.clearInstanceListeners(m);
+            m.setMap(null);
+        });
         this.markers = [];
 
         this.locations.forEach(location => {

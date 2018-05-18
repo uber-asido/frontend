@@ -3,7 +3,6 @@ import * as moment from "moment";
 import { Inject, forwardRef } from "@angular/core";
 
 import { Binder, ODataService } from "../rest";
-import { Expression } from "../wheeler";
 
 export interface FilmingLocation {
     movieKey: string;
@@ -15,11 +14,7 @@ export interface FilmingLocation {
 
 export class FilmingLocationApi {
     // Optimization - select properties that are needed for the UI only.
-    private static readonly odataSelect = encodeURIComponent([
-        Expression.nameof<FilmingLocation, string>(e => e.movieKey),
-        Expression.nameof<FilmingLocation, number>(e => e.latitude),
-        Expression.nameof<FilmingLocation, number>(e => e.longitude)
-    ].join(","));
+    private static readonly odataSelect = encodeURIComponent(["movieKey", "latitude", "longitude"].join(","));
 
     constructor(@Inject(forwardRef(() => ODataService)) private readonly odata: ODataService) { }
 

@@ -3,7 +3,6 @@ import * as moment from "moment";
 import { Inject, forwardRef } from "@angular/core";
 
 import { Binder, ODataService } from "../rest";
-import { QueryBuilder } from "../wheeler";
 
 export interface UploadHistory {
     key: string;
@@ -15,15 +14,10 @@ export interface UploadHistory {
 }
 
 export class FileApi {
-    private readonly queryBuilder = new QueryBuilder<UploadHistory>();
-
     constructor(@Inject(forwardRef(() => ODataService)) private readonly odata: ODataService) { }
 
     public async getUploadHistory(page: number, pageSize: number): Promise<UploadHistory[]> {
-        const query = (page > 0 ? this.queryBuilder.skip(pageSize * page) : this.queryBuilder)
-            .orderByDescending(e => e.timestamp)
-            .top(pageSize);
-        const entities = await this.odata.getMulti<UploadHistory>(`/UploadHistory?${query.toQueryString()}`);
+        const entities = await this.odata.getMulti<UploadHistory>(`/UploadHistory?$skip=${pageSize * page}&$top=${pageSize}&$orderby=timestamp desc`);
         entities.forEach(e => this.bind(e));
         return entities;
     }

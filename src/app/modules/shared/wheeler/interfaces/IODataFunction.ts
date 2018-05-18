@@ -1,3 +1,0 @@
-interface IODataFunction {
-  name:string;
-}

@@ -10,7 +10,7 @@ export { FilmingLocation, SearchItem, SearchItemType };
 export class MapState {
     public locations: FilmingLocation[] = [];
     public loadingLocations = false;
-    public selectedSearchItem: SearchItem = null;
+    public selectedSearchItem: SearchItem = undefined;
     public selectedMovie: Movie;
 }
 
@@ -31,6 +31,10 @@ export class MapService {
     }
 
     public async selectSearchItem(search: SearchItem): Promise<void> {
+        if (this.state.selectedSearchItem === search) {
+            return;
+        }
+
         this.state.selectedSearchItem = search;
 
         this.state.loadingLocations = true;

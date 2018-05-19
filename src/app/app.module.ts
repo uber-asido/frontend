@@ -7,6 +7,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { AppComponent } from './app.component';
 import { routes } from "./app.routes";
 
+import { AppInsightsModule } from "./modules/shared/app-insights";
 import { BrowserGlobalsModule } from "./modules/shared/browser-globals";
 import { NavigationModule } from "./modules/shared/navigation";
 
@@ -22,6 +23,7 @@ import { NavigationModule } from "./modules/shared/navigation";
         // https://github.com/angular/material2/issues/10820
         OverlayModule,
 
+        AppInsightsModule,
         BrowserGlobalsModule,
         NavigationModule,
 

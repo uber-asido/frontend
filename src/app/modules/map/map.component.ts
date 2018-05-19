@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { AppInsightsService } from "../shared/app-insights";
 import { FilmingLocation, MapService } from "./map.service";
 import { Location } from "./google-map";
 
@@ -13,7 +14,12 @@ export class MapComponent {
     public get selectedSearchItem() { return this.mapService.state.selectedSearchItem; }
     public get selectedMovie() { return this.mapService.state.selectedMovie; }
 
-    constructor(private readonly mapService: MapService) { }
+    constructor(
+        appInsights: AppInsightsService,
+        private readonly mapService: MapService
+    ) {
+        appInsights.logPageView("map");
+    }
 
     public async onLocationSelected(location: FilmingLocation): Promise<void> {
         await this.mapService.selectMovie(location.movieKey);

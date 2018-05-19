@@ -7,7 +7,7 @@ WORKDIR /ng-app
 COPY . .
 RUN $(npm bin)/ng build --prod
 
-# Setup
+# Run
 FROM nginx:1.14.0-alpine
 
 COPY nginx/default.conf /etc/nginx/conf.d/

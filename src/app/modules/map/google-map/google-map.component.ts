@@ -12,8 +12,8 @@ export interface Location {
 }
 
 class MarkerIcon {
-    public static readonly deselected = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
-    public static readonly selected = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+    public static readonly deselected = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+    public static readonly selected = "https://maps.google.com/mapfiles/ms/icons/red-dot.png";
 }
 
 @Component({

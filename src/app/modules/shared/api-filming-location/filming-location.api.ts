@@ -14,7 +14,7 @@ export interface FilmingLocation {
 
 export class FilmingLocationApi {
     // Optimization - select properties that are needed for the UI only.
-    private static readonly odataSelect = encodeURIComponent(["movieKey", "latitude", "longitude"].join(","));
+    private static readonly odataSelect = ["movieKey", "latitude", "longitude"].join(",");
 
     constructor(@Inject(forwardRef(() => ODataService)) private readonly odata: ODataService) { }
 
@@ -27,6 +27,6 @@ export class FilmingLocationApi {
     }
 
     public searchBySearchItem(searchItemKey: string): Promise<FilmingLocation[]> {
-        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchBySearchItem(searchItemKey=${encodeURIComponent(searchItemKey)})?$select=${FilmingLocationApi.odataSelect}`);
+        return this.odata.getMulti<FilmingLocation>(`/FilmingLocation/Service.SearchBySearchItem(searchItemKey=${searchItemKey})?$select=${FilmingLocationApi.odataSelect}`);
     }
 }

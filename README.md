@@ -58,6 +58,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Create a docker image: `docker build -t uber-frontend .`
 Run docker image: `docker run -p 4200:80 uber-frontend`
 
+### Monitoring
+
+The project has [Application Insights](https://azure.microsoft.com/en-us/services/application-insights/) integrated, which collects various runtime information, such as page load time, API response times, unhandled exceptions, etc.
+
 ## Live
 
 Map view:

@@ -2,7 +2,7 @@
 
 ### Disclaimer
 
-This is the frontend side of the SM Movies project, while the development emphasis was on the backend. For more information visit the [backend repository](https://github.com/uber-asido/backend).
+This is the frontend side of the SM Movies project. However, the development emphasis is on the backend. For more information visit the [backend repository](https://github.com/uber-asido/backend).
 
 ---
 
@@ -60,7 +60,11 @@ Run docker image: `docker run -p 4200:80 uber-frontend`
 
 ## Live
 
+Map view:
 https://uber-frontend.azurewebsites.net/
+
+Admin section:
+https://uber-frontend.azurewebsites.net/admin
 
 ## Author
 

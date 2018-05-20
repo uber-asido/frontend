@@ -52,6 +52,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Create a docker image: `docker build -t uber-frontend .`
 Run docker image: `docker run -p 4200:80 uber-frontend`
 
+## Live
+
+https://uber-frontend.azurewebsites.net/
+
 ## Related projects
 
 [SF Movies backend](https://github.com/uber-asido/backend)

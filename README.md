@@ -1,5 +1,11 @@
 # SF Movies frontend
 
+### Disclaimer
+
+This is the frontend side of the SM Movies project, while the development emphasis was on the backend. For more information visit the [backend repository](https://github.com/uber-asido/backend).
+
+---
+
 The purpose of the client is to fetch data from the [backend](https://github.com/uber-asido/backend) service and visually present it on a map. The client uses [Angular framework](https://angular.io/) and is written in [TypeScript](https://www.typescriptlang.org/). Among the features it includes:
 * Show all filming locations at once.
 * Map point clustering.
@@ -55,6 +61,14 @@ Run docker image: `docker run -p 4200:80 uber-frontend`
 ## Live
 
 https://uber-frontend.azurewebsites.net/
+
+## Author
+
+Arvydas Sidorenko
+
+[Resume](https://drive.google.com/open?id=1rp6DXQoXR7WZFy2ogMdRpWNTGJtF22EA)
+
+[LinkedIn](www.linkedin.com/in/arvydassidorenko)
 
 ## Related projects
 

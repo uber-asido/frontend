@@ -62,14 +62,6 @@ Run docker image: `docker run -p 4200:80 uber-frontend`
 
 The project has [Application Insights](https://azure.microsoft.com/en-us/services/application-insights/) integrated, which collects various runtime information, such as page load time, API response times, unhandled exceptions, etc.
 
-## Live
-
-Map view:
-https://uber-frontend.azurewebsites.net/
-
-Admin section:
-https://uber-frontend.azurewebsites.net/admin
-
 ## Author
 
 Arvydas Sidorenko

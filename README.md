@@ -62,14 +62,6 @@ Run docker image: `docker run -p 4200:80 uber-frontend`
 
 The project has [Application Insights](https://azure.microsoft.com/en-us/services/application-insights/) integrated, which collects various runtime information, such as page load time, API response times, unhandled exceptions, etc.
 
-## Author
-
-Arvydas Sidorenko
-
-[Resume](https://drive.google.com/open?id=1rp6DXQoXR7WZFy2ogMdRpWNTGJtF22EA)
-
-[LinkedIn](www.linkedin.com/in/arvydassidorenko)
-
 ## Related projects
 
 [SF Movies backend](https://github.com/uber-asido/backend)
